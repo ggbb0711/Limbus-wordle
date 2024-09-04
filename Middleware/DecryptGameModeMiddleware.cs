@@ -22,9 +22,7 @@ public class DecryptGameModeMiddleware<GameMode>
             {
                 var encryptedGameMode = context.Request.Form["encryptedGameMode"];
                 var decryptedData = dataProtector.Unprotect(encryptedGameMode);
-
                 var gameMode = JsonConvert.DeserializeObject<GameMode>(decryptedData);
-
                 // Attach the deserialized gameMode to the context for later use
                 context.Items["DecryptedGameMode"] = gameMode;
             }

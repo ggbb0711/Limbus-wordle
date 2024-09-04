@@ -7,15 +7,14 @@ namespace Limbus_wordle.BackgroundTask
     {
         private Timer _timer;
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            ScheduleNextRun();
-            return Task.CompletedTask;
+            await DoWork();
         }
 
         private async Task DoWork()
         {
-            Console.WriteLine("Resetting daily identity");
+            Console.WriteLine(DateTime.Today.ToString()+" Resetting daily identity");
             await DailyIdentityGameModeService.Reset();
             ScheduleNextRun();
         }

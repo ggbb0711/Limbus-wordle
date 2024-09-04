@@ -35,6 +35,7 @@ namespace Limbus_wordle.Services
                     deserializeDailyIdentities.YesterdayIdentity = deserializeDailyIdentities.TodayIdentity;
                     deserializeDailyIdentities.TodayIdentity = (await gameStateIdentity.GenerateNewGameState()).CorrectGuess;
                 }
+                Console.WriteLine(deserializeDailyIdentities);
                 await File.WriteAllTextAsync(Path.Combine(rootLink,Environment.GetEnvironmentVariable("DailyIdentityJSONFile")),JsonSerializer.Serialize(deserializeDailyIdentities));
                 _dailyIdentityFile = deserializeDailyIdentities;
             }

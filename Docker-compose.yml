@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  web:
+    image: limbus-wordle:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - IdentityJSONFile=${IdentityJSONFile}
+      - DailyIdentityJSONFile=${DailyIdentityJSONFile}
+      - IdentityImgFilePath=${IdentityImgFilePath}
+      - CookiePass=${CookiePass}
