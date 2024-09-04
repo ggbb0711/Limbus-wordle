@@ -1,0 +1,162 @@
+﻿
+<div class="game-container">
+    <div class="game-head">
+        <div class="game-head-content">
+            <div class="game-head-result center" id="game-head-result">
+            </div>
+            <div class="center" id="game-head-input-continue">
+            </div>
+        </div>
+        <div class="game-head-footer" id="game-head-footer">
+        </div>
+    </div>
+    <div id="guess-table-identity">
+        
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            function loadTable(){
+                $.ajax({
+                    url:'@Url.Action("GuessTableIdentity","EndlessIdentityMode")',
+                    method:"POST",
+                    data:{encryptedGameMode:localStorage.getItem("EndlessIdentityMode")||""},
+                    success:(data)=>{
+                        $("#guess-table-identity").html(data)
+                    }
+                })
+            }
+
+            function loadInputContinue(){
+                $.ajax({
+                    url:'@Url.Action("InputContinueButton","EndlessIdentityMode")',
+                    method:"POST",
+                    data:{encryptedGameMode:localStorage.getItem("EndlessIdentityMode")||""},
+                    success:(data)=>{
+                        $("#game-head-input-continue").html(data)
+                        playAgainClickHandler()
+                        autoCompleteHandler()
+                    }
+                })
+            }
+
+            function loadResult(){
+                $.ajax({
+                    url:'@Url.Action("Result","EndlessIdentityMode")',
+                    method:"POST",
+                    data:{encryptedGameMode:localStorage.getItem("EndlessIdentityMode")||""},
+                    success:(data)=>{
+                        $("#game-head-result").html(data)
+                    }
+                })
+            }
+
+            function loadFooter(){
+                $.ajax({
+                    url:'@Url.Action("Footer","EndlessIdentityMode")',
+                    method:"POST",
+                    data:{encryptedGameMode:localStorage.getItem("EndlessIdentityMode")||""},
+                    success:(data)=>{
+                        $("#game-head-footer").html(data)
+                    }
+                })
+            }
+
+            function playAgainClickHandler(){
+                $("#play-again-btn").click(()=>{
+                    $.ajax({
+                    url:'@Url.Action("NewGame","EndlessIdentityMode")',
+                    method:"POST",
+                    data:{encryptedGameMode:localStorage.getItem("EndlessIdentityMode")||""},
+                        success:(data)=>{
+                            localStorage.setItem("EndlessIdentityMode",data)
+                            loadFooter()
+                            loadInputContinue()
+                            loadResult()
+                            loadTable()
+                        }
+                    })
+            })
+            }
+
+            function autoCompleteHandler(){
+                $("#guess-input").autocomplete({
+                    select:(event,ui)=>{
+                        $.ajax({
+                            url:'@Url.Action("Guess","EndlessIdentityMode")',
+                            method:"POST",
+                            data:{guess:ui.item.value,encryptedGameMode:localStorage.getItem("EndlessIdentityMode")||""},
+                            success:(data)=>{
+                                localStorage.setItem("EndlessIdentityMode",data)
+                                loadFooter()
+                                loadInputContinue()
+                                loadResult()
+                                loadTable()
+                            }
+                        })
+                    },
+                    minLength: 0,
+                    source: function (request, response) {
+                        $.ajax({
+                            url: '@Url.Action("AutoComplete", "EndlessIdentityMode")',
+                            data: { term: request.term },
+                            success: function (data) {
+                                response($.map(data, function (item) {
+                                    return {
+                                        label: item.name,
+                                        value: item.name,
+                                        icon: item.icon // Add the icon to the item
+                                    };
+                                }));
+                            }
+                        });
+                    },
+                }).focus(function() {
+                    $(this).autocomplete('search', $(this).val())
+                }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                    var $li = $('<li>'),
+                        $div = $('<div>'),
+                        $p = $('<p>'),
+                        $img = $('<img>');
+
+                    $div.addClass("suggest-item")
+
+                    $img.attr({
+                        src: item.icon, // Use the icon URL
+                        alt: item.label,
+                    });
+
+                    $p.text(item.label);
+                    $img.addClass("suggest-icon")
+
+                    $div.append($img).append($p);
+                    $li.append($div)
+                    return $li.appendTo(ul);
+                };
+            }
+
+
+            $.ajax({
+                url:'@Url.Action("Guess","EndlessIdentityMode")',
+                method:"POST",
+                data:{guess:"",encryptedGameMode:localStorage.getItem("EndlessIdentityMode")||""},
+                success:(data)=>{
+                    localStorage.setItem("EndlessIdentityMode",data)
+                    loadFooter()
+                    loadInputContinue()
+                    loadResult()
+                    loadTable()
+                }
+            })
+        });
+    </script>
+}

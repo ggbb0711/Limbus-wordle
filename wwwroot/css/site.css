@@ -1,0 +1,272 @@
+:root{
+  --background-black: rgb(27,24,24,0.81);
+  --yellow: rgb(248,195,0);
+  --red: rgb(189,0,0);
+  --blue: rgb(16,62,99);
+}
+
+@font-face {
+  font-family: "mikodacs";
+  src: url("/Content/Fonts/mikodacs/mikodacs.regular.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: 'mikodacs';
+  text-decoration: none;
+}
+
+a{
+  color: white;
+}
+
+a:hover{
+  color: var(--background-black);
+}
+
+body {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden{
+  display: none;
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header{
+  width: 100%;
+  background-color: var(--blue);
+  padding: 4px;
+}
+
+.header{
+  display: flex;
+  gap: 4px;
+  width: 100%;
+}
+
+.main-container{
+  flex: 1;
+  background: url("/Content/Images/Background.jpg") center top / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-container main{
+  flex: 1;
+  height: 100%;
+  background-color: var(--background-black);
+  border-left: 2px solid var(--yellow);
+  border-right: 2px solid var(--yellow);
+  max-width: 1000px;
+  width: 100%;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container main::-webkit-scrollbar{
+  display: none;
+}
+
+.game-container{
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: auto;
+  color: white;
+  flex: 1;
+  padding: 8px;
+  scale: 1;
+}
+
+.game-container::-webkit-scrollbar {
+  display: none;
+}
+
+.game-container{
+  -ms-overflow-style: none;  
+  scrollbar-width: none;
+}
+
+.game-head{
+  width: 100%;
+  max-width: 800px;
+  border-radius: 8px;
+  min-height: 200px;
+  background-color: var(--blue);
+  margin: auto;
+  padding-top: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.game-head-content{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+  gap: 4px;
+}
+
+.game-head-result{
+  text-align: center;
+}
+
+.game-head-content>*{
+  flex: 1;
+  width: 100%;
+}
+
+.game-title-header{
+  font-size: 26px;
+  font-weight: lighter;
+}
+
+.game-head-tries{
+  font-size: 20px;
+}
+
+.suggest-item{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ui-autocomplete{
+  font-size: 22px;
+}
+
+.game-head-footer{
+  background-color: rgb(41,41,41);
+  align-self: flex-end;
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  margin-top: auto;
+  display: flex;
+  gap: 4px;
+  justify-content: space-around;
+}
+
+.game-head-footer-daily-container{
+  width: 100%;
+}
+
+.game-head-footer-daily-container>div{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.guess-input{
+  width: 80%;
+}
+
+.guess-table{
+  background-color: black;
+  border: 4px solid black;
+  border-radius: 4px;
+  font-size: 20px;
+  width: 100%;
+  margin: auto;
+  font-weight: 300;
+}
+
+.guess-table{
+  margin-top: 12px;
+}
+
+.guess-table th{
+  font-weight: lighter;
+}
+
+.guess-table th,
+.guess-table td{
+  border-radius: 4px;
+}
+
+.guess-table *{
+  font-size: 1em;
+}
+
+.guess-table-skills{
+  width: 100%;
+}
+
+.guess-table-header{
+  background-color: var(--blue);
+}
+
+
+.guess-slot{
+  background-color: var(--red);
+  text-align: center;
+  max-width: 5em;
+  min-height: auto;
+  padding: 0px;
+}
+
+.guess-slot.correct{
+  background-color: green;
+}
+
+.guess-bg-img{
+  width: 5em;
+  object-fit: contain;
+}
+
+.guess-sm-img{
+  width: 1.5em;
+  object-fit: contain;
+}
+
+.yesterday-icon-container{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.yesterday-icon{
+  max-width: 28px;
+}
+
+@media screen and (max-width: 800px) {
+  .guess-table{
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .guess-table{
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .guess-table{
+    font-size: 12px;
+  }
+}

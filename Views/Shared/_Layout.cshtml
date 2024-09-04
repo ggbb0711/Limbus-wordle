@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Limbus wordle</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link  rel="stylesheet" href="~/css/autocomplete.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Limbus_wordle.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="header">
+            <a class="navbar-brand" asp-area="" asp-controller="DailyIdentityMode" asp-action="Index">Daily Mode</a>
+            <a class="navbar-brand" asp-area="" asp-controller="EndlessIdentityMode" asp-action="Index">Endless Mode</a>
+            </div>
+        </nav>
+    </header>
+    <div class="main-container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,24 @@
+@model GameState<Identity>
+
+@{
+    GameState<Identity>? GameState = Model;
+    int maxAttempts = GameState.MaxCount;
+    int guessCount = GameState.GuessCount;
+    Identity correctGuess = GameState.CorrectGuess;
+}
+
+<h1 class="game-title-header">Limbus wordle</h1>
+<p class="game-head-tries">Tries @guessCount/@maxAttempts</p>
+@if (GameState.GameOver)
+{
+    <img src="@GameState.CorrectGuess.Icon" alt="@GameState.CorrectGuess.Name"/>
+    if(GameState.HasWon)
+    {
+        @:<p>You won!</p>
+    }
+    else
+    {
+        @:<p>Too bad.</p>
+    }
+    <p>The identity was @GameState.CorrectGuess.Name</p>
+}

@@ -1,0 +1,75 @@
+@model GameState<Identity>
+
+@{
+    GameState<Identity>? GameState = Model;
+    Identity correctGuess = GameState.CorrectGuess;
+    List<Identity> guessess = GameState.Guesses;
+}
+
+<table class="guess-table">
+        <tr>
+            <th class="guess-table-header">Icon</th>
+            <th class="guess-table-header">Skills</th>
+            <th class="guess-table-header">Sinner</th>
+        </tr>
+    
+        @foreach (var identity in guessess)
+        {
+            <tr>
+                <td class="guess-slot @(identity.Name==correctGuess.Name?"correct":"")">
+                    <img class="guess-bg-img" src="@(identity.Icon)" alt="@(identity.Name)"/>
+                </td>
+                <td>
+                    <table class="guess-table-skills">
+                        <tr>
+                            <th class="guess-table-header"> </th>
+                            <th class="guess-table-header">Skill 1</th>
+                            <th class="guess-table-header">Skill 2</th>
+                            <th class="guess-table-header">Skill 3</th>
+                        </tr>
+                        <tr>
+                            <td class="guess-table-header">Affinity</td>
+                            @for (int i = 0; i < identity.Skills.Count; i++)
+                            {
+                                var correctGuessSkill = correctGuess.Skills.ElementAt(i);
+                                var guessSkill = identity.Skills.ElementAt(i);
+                                <td class="guess-slot @(guessSkill.SinAffinity==correctGuessSkill.SinAffinity?"correct":"")"><img class="guess-sm-img" src="/Content/Images/sin-affinity/affinity_@(guessSkill.SinAffinity)_big.webp" alt="@(guessSkill.SinAffinity)"/></td>
+                            }
+                        </tr>
+                        <tr>
+                            <td class="guess-table-header">Attack type</td>
+                            @for (int i = 0; i < identity.Skills.Count; i++)
+                            {
+                                var correctGuessSkill = correctGuess.Skills.ElementAt(i);
+                                var guessSkill = identity.Skills.ElementAt(i);
+                                <td class="guess-slot @(guessSkill.AttackType==correctGuessSkill.AttackType?"correct":"")"><img class="guess-sm-img" src="/Content/Images/attack/attackt_@(guessSkill.AttackType).webp" alt="@(guessSkill.AttackType)"/></td>
+                            }
+                        </tr>
+                        <tr>
+                            <td class="guess-table-header">Coin count</td>
+                            @for (int i = 0; i < identity.Skills.Count; i++)
+                            {
+                                var correctGuessSkill = correctGuess.Skills.ElementAt(i);
+                                var guessSkill = identity.Skills.ElementAt(i);
+                                <td class="guess-slot @(guessSkill.SkillCoinCount==correctGuessSkill.SkillCoinCount?"correct":"")">
+                                    @(guessSkill.SkillCoinCount)
+                                    @if(guessSkill.SkillCoinCount<correctGuessSkill.SkillCoinCount)
+                                    {
+                                        @:+
+                                    }
+                                    @if(guessSkill.SkillCoinCount>correctGuessSkill.SkillCoinCount)
+                                    {
+                                        @:-
+                                    }
+                                </td>
+                            }
+                        </tr>
+                    </table>
+                </td>
+                <td class="guess-slot @(identity.Sinner==correctGuess.Sinner?"correct":"")">
+                    <img class="guess-bg-img" src="/Content/Images/sinner-icon/@(identity.Sinner.Replace(" ","_"))_Icon.png"/>
+                </td>
+            </tr> 
+        }
+        
+    </table>

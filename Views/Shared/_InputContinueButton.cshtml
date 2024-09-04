@@ -1,0 +1,7 @@
+
+@{
+    var gameOver = ViewBag.GameOver;
+}
+
+<input class="@(!gameOver?"hidden":"")" type="button" value="Play again!" id="play-again-btn"/>
+<input class="guess-input @(gameOver?"hidden":"")" name="guess" type="text" id="guess-input" placeholder="Enter the name of the ID">
