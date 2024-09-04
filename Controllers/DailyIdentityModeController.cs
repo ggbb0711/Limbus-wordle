@@ -29,7 +29,7 @@ public class DailyIdentityModeController : Controller
     [HttpPost]
     public async Task<IActionResult> Guess(string guess="")
     {
-        var gameMode = GetDailyGameMode();
+        var gameMode = await GetDailyGameMode();
 
         bool winCoditionBefore = gameMode.GameState.HasWon;
         var gameState = await _gameStateIdentityService.Guess(gameMode.GameState,guess);
@@ -54,14 +54,14 @@ public class DailyIdentityModeController : Controller
     [HttpPost]
     public async Task<IActionResult> GuessTableIdentity( )
     {
-        var gameMode = GetDailyGameMode();
+        var gameMode = await GetDailyGameMode();
         return PartialView("_GuessTableIdentity",gameMode.GameState);
     }
 
     [HttpPost]
     public async Task<IActionResult> InputContinueButton( )
     {
-        var gameMode = GetDailyGameMode();
+        var gameMode = await GetDailyGameMode();
         if(gameMode.GameState.GameOver) return Ok("<p>Return tomorrow for another game</p>");
         ViewBag.GameOver=gameMode.GameState.GameOver;
         return PartialView("_InputContinueButton");
@@ -70,23 +70,24 @@ public class DailyIdentityModeController : Controller
     [HttpPost]
     public async Task<IActionResult> Result()
     {
-        var gameMode = GetDailyGameMode();
+        var gameMode = await GetDailyGameMode();
         return PartialView("_IdentityResult",gameMode.GameState);
     }
 
     [HttpPost]
     public async Task<IActionResult> Footer( )
     {
-        var gameMode = GetDailyGameMode();
+        var gameMode = await GetDailyGameMode();
         ViewBag.BestScore = gameMode.BestScore;
         ViewBag.WinStreak = gameMode.WinStreak;
         ViewBag.YesterdayIdentity = DailyIdentityGameModeService.GetDailyIdentityFile().YesterdayIdentity;
         return PartialView("_DailyModeIdentityFooter");
     }
 
-    private DailyGameMode<Identity> GetDailyGameMode()
+    private async Task<DailyGameMode<Identity>> GetDailyGameMode()
     {
         var dailyIdentityFile = DailyIdentityGameModeService.GetDailyIdentityFile();
+        if(dailyIdentityFile==null) await DailyIdentityGameModeService.Reset();
         var gameMode = HttpContext.Items["DecryptedGameMode"] as DailyGameMode<Identity>;
         gameMode??=new DailyGameMode<Identity>()
         {
