@@ -87,7 +87,15 @@ public class DailyIdentityModeController : Controller
     private async Task<DailyGameMode<Identity>> GetDailyGameMode()
     {
         var dailyIdentityFile = DailyIdentityGameModeService.GetDailyIdentityFile();
-        if(dailyIdentityFile==null) await DailyIdentityGameModeService.Reset();
+        try
+        {
+            if(dailyIdentityFile==null) await DailyIdentityGameModeService.Reset();
+        }
+        catch (System.Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw;
+        }
         var gameMode = HttpContext.Items["DecryptedGameMode"] as DailyGameMode<Identity>;
         gameMode??=new DailyGameMode<Identity>()
         {
