@@ -16,7 +16,15 @@ namespace Limbus_wordle.BackgroundTask
 
         private async Task DoWork()
         {
-            await _scrapeIdentities.ScrapAsync();
+            try
+            {
+                await _scrapeIdentities.ScrapAsync();
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

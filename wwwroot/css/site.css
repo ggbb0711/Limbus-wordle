@@ -55,6 +55,34 @@ header{
   display: flex;
   gap: 4px;
   width: 100%;
+  align-items: center;
+  padding: 4px;
+}
+
+.header-btn{
+  background-color: #29abe0;
+  min-width: 60px;
+  padding: 2px 12px;
+  border-radius: 7px;
+  min-height: 35px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-btn:hover{
+  color: #29abe0;
+  background-color: white;
+}
+
+.support-btn{
+  margin-left: auto;
+}
+
+.support-icon{
+  width: 30px;
+  height: 30px;
 }
 
 .main-container{
@@ -268,5 +296,8 @@ header{
 @media screen and (max-width: 450px) {
   .guess-table{
     font-size: 12px;
+  }
+  .support-btn>span{
+    display: none;
   }
 }

@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 using Limbus_wordle.Interfaces;
 using Limbus_wordle.util.Functions.DownloadImg;
+using Microsoft.AspNetCore.Identity;
 
 namespace Limbus_wordle.util.WebScrapper
 {
@@ -18,16 +19,17 @@ namespace Limbus_wordle.util.WebScrapper
             var filePath = Path.Combine(rootLink, Environment.GetEnvironmentVariable("IdentityJSONFile"));
             
             string identitiesFile = "{}";
+            var identities = new Dictionary<string,Identity>();
             try
             {
-                identitiesFile=await File.ReadAllTextAsync(filePath);
+                identitiesFile=(await File.ReadAllTextAsync(filePath))??"{}";
+                identities =  JsonSerializer.Deserialize<Dictionary<string,Identity>>(identitiesFile);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
+                Console.WriteLine(e);
             } 
 
-            var identities =  JsonSerializer.Deserialize<Dictionary<string,Identity>>(identitiesFile)?? 
-                new Dictionary<string, Identity>();
 
             //Get the links to all identities
             var identitiesLinks= document.DocumentNode.QuerySelectorAll(".employees-container .avatar-card.card a")
@@ -40,19 +42,20 @@ namespace Limbus_wordle.util.WebScrapper
                     Console.WriteLine("Entering: "+link);
                     document = web.Load(link);
                     var characterHeader = document.DocumentNode.QuerySelector(".character-header.ag");
-                    var Name = characterHeader.QuerySelector(".character-details>h1").InnerText.Replace("NEW!"," ").Replace("[","").Replace("]","").Trim();
+                    var NameNodeInside = characterHeader.QuerySelector(".character-details>h1").InnerText.Replace("NEW!"," ").Trim();
+                    var Name = NameNodeInside.Replace("[","").Replace("]","").Trim();
                     var IdentityIconNode = characterHeader.QuerySelector("img[loading='lazy']");
                     var IdentityIcon =(IdentityIconNode!=null)?"https://www.prydwen.gg" + IdentityIconNode.Attributes["data-src"].Value:"Missing";
-                    var Sinner = document.DocumentNode.QuerySelector("#section-profile .info-list.row .info-list-row:nth-child(3) .details").InnerText;
-                    var skills = document.DocumentNode.QuerySelectorAll(".skills.row .skill-box.hsr")
+                    var Sinner = NameNodeInside.Split("] ")[1];
+                    var skills = document.DocumentNode.QuerySelectorAll(".skills-v2 .col")
                         .Take(3);
                     var SplashArtNode = document.DocumentNode.QuerySelector("#section-gallery .gatsby-image-wrapper.gatsby-image-wrapper-constrained.full-image img[loading='lazy']");
                     var SplashArt =(SplashArtNode!=null)?"https://www.prydwen.gg" + SplashArtNode.Attributes["data-src"].Value:"Missing";
                     List<Skill> IdentitySkills = skills.Select(skill=>new Skill()
                         {
-                            SinAffinity = skill.QuerySelector(".skill-header .skill-type.pill.limbus-affinity-box").InnerText,
-                            AttackType = skill.QuerySelector(".skill-details .info-row:nth-child(1) .details").InnerText,
-                            SkillCoinCount= Int32.Parse(skill.QuerySelector(".skill-details .info-row:nth-child(3) .details").InnerText),
+                            SinAffinity = skill.QuerySelector(".skill-header .skill-info .skill-type.pill.limbus-affinity-box").InnerText,
+                            AttackType = skill.QuerySelector(".additional-information p:nth-child(1) span").InnerText,
+                            SkillCoinCount= Int32.Parse(skill.QuerySelector(".additional-information p:nth-child(3) span").InnerText),
                         }).ToList();
                     var identityIconFileName = SanitizeFileName(Name+"_icon.jpg");
                     var splashArtFileName = SanitizeFileName(Name+"_splash.jpg");
