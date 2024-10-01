@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Web;
 using HtmlAgilityPack;
 using Limbus_wordle.Interfaces;
 using Limbus_wordle.util.Functions.DownloadImg;
@@ -42,7 +43,7 @@ namespace Limbus_wordle.util.WebScrapper
                     Console.WriteLine("Entering: "+link);
                     document = web.Load(link);
                     var characterHeader = document.DocumentNode.QuerySelector(".character-header.ag");
-                    var NameNodeInside = characterHeader.QuerySelector(".character-details>h1").InnerText.Replace("NEW!"," ").Trim();
+                    var NameNodeInside = HttpUtility.HtmlDecode(characterHeader.QuerySelector(".character-details>h1").GetDirectInnerText().Replace("NEW!"," ").Trim());
                     var Name = NameNodeInside.Replace("[","").Replace("]","").Trim();
                     var IdentityIconNode = characterHeader.QuerySelector("img[loading='lazy']");
                     var IdentityIcon =(IdentityIconNode!=null)?"https://www.prydwen.gg" + IdentityIconNode.Attributes["data-src"].Value:"Missing";
