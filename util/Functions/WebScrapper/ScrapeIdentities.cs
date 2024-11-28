@@ -2,9 +2,10 @@ using System.Net;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Web;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using HtmlAgilityPack;
 using Limbus_wordle.Interfaces;
-using Limbus_wordle.util.Functions.DownloadImg;
 using Microsoft.AspNetCore.Identity;
 
 namespace Limbus_wordle.util.WebScrapper
@@ -46,39 +47,55 @@ namespace Limbus_wordle.util.WebScrapper
                     var NameNodeInside = HttpUtility.HtmlDecode(characterHeader.QuerySelector(".character-details>h1").GetDirectInnerText().Replace("NEW!"," ").Trim());
                     var Name = NameNodeInside.Replace("[","").Replace("]","").Trim();
                     var IdentityIconNode = characterHeader.QuerySelector("img[loading='lazy']");
-                    var IdentityIcon =(IdentityIconNode!=null)?"https://www.prydwen.gg" + IdentityIconNode.Attributes["data-src"].Value:"Missing";
+                    var IdentityIconUrl =(IdentityIconNode!=null)?"https://www.prydwen.gg" + IdentityIconNode.Attributes["data-src"].Value:"Missing";
                     var Sinner = NameNodeInside.Split("] ")[1];
                     var skills = document.DocumentNode.QuerySelectorAll(".skills-v2 .col")
                         .Take(3);
-                    var SplashArtNode = document.DocumentNode.QuerySelector("#section-gallery .gatsby-image-wrapper.gatsby-image-wrapper-constrained.full-image img[loading='lazy']");
-                    var SplashArt =(SplashArtNode!=null)?"https://www.prydwen.gg" + SplashArtNode.Attributes["data-src"].Value:"Missing";
+                    // var SplashArtNode = document.DocumentNode.QuerySelector("#section-gallery .gatsby-image-wrapper.gatsby-image-wrapper-constrained.full-image img[loading='lazy']");
+                    // var SplashArt =(SplashArtNode!=null)?"https://www.prydwen.gg" + SplashArtNode.Attributes["data-src"].Value:"Missing";
                     List<Skill> IdentitySkills = skills.Select(skill=>new Skill()
                         {
                             SinAffinity = skill.QuerySelector(".skill-header .skill-info .skill-type.pill.limbus-affinity-box").InnerText,
                             AttackType = skill.QuerySelector(".additional-information p:nth-child(1) span").InnerText,
                             SkillCoinCount= Int32.Parse(skill.QuerySelector(".additional-information p:nth-child(3) span").InnerText),
                         }).ToList();
-                    var identityIconFileName = SanitizeFileName(Name+"_icon.jpg");
-                    var splashArtFileName = SanitizeFileName(Name+"_splash.jpg");
-                    if(IdentityIconNode!=null)await DownloadImgAsync.Download(IdentityIcon,Path.Combine(rootLink,Environment.GetEnvironmentVariable("IdentityImgFilePath")+identityIconFileName));
-                    if(SplashArtNode!=null)await DownloadImgAsync.Download(SplashArt,Path.Combine(rootLink,Environment.GetEnvironmentVariable("IdentityImgFilePath")+splashArtFileName));
+                    var identityIconFileName = "Missing";
+                    // var splashArtFileName = SanitizeFileName(Name+"_splash.jpg");
+                    if(IdentityIconNode!=null) identityIconFileName = await UploadToCloudinary(IdentityIconUrl,Name);
+                    // if(SplashArtNode!=null)await DownloadImgAsync.Download(SplashArt,Path.Combine(rootLink,Environment.GetEnvironmentVariable("IdentityImgFilePath")+splashArtFileName));
                     identities[link] = new Identity()
                     {
                         Name = Name,
                         Sinner = Sinner,
-                        Icon =(IdentityIconNode!=null)? '/'+Environment.GetEnvironmentVariable("IdentityImgFilePath")+identityIconFileName:"Missing",
-                        SplashArt =(SplashArtNode!=null)? '/'+Environment.GetEnvironmentVariable("IdentityImgFilePath")+splashArtFileName:"Missing",
+                        Icon =identityIconFileName,
                         Skills = IdentitySkills
                     };
                 }
             }
             await File.WriteAllTextAsync(Path.Combine(rootLink,Environment.GetEnvironmentVariable("IdentityJSONFile")),JsonSerializer.Serialize(identities));
         }
-        private string SanitizeFileName(string fileName)
-        {
-            string invalidChars = new string(Path.GetInvalidFileNameChars());
-            string invalidReStr = string.Format("[{0}]", Regex.Escape(invalidChars));
-            return Regex.Replace(fileName, invalidReStr, "_");
+
+        private async Task<string> UploadToCloudinary(string url,string fileName){
+            try
+            {
+                Cloudinary cloudinary = new(Environment.GetEnvironmentVariable("CLOUDINARY_URL"));
+                cloudinary.Api.Secure = true;
+                var uploadParams = new ImageUploadParams()
+                {
+                    File = new FileDescription(url),
+                    PublicId=fileName,
+                    UseFilename = true,
+                    UniqueFilename=false,
+                    Overwrite = true
+                };
+                var uploadResult = await cloudinary.UploadAsync(uploadParams);
+                return uploadResult.SecureUrl.ToString();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return "";
+            }
         }
     }
 

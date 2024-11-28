@@ -17,7 +17,6 @@ builder.Services.AddSingleton<ScrapeIdentities>();
 builder.Services.AddHostedService<BackgroundScrapeData>();
 builder.Services.AddHostedService<BackgroundResetDailyIdentityMode>(); 
 builder.Services.AddTransient<IFileSystem,FileSystem>();
-builder.Services.AddTransient<GameStateIdentityService>();
 builder.Services.AddDataProtection();
 
 var app = builder.Build();
@@ -45,19 +44,19 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.UseWhen(ctx=>ctx.Request.Path.StartsWithSegments("/EndlessIdentityMode"),app=>
-{
-    app.UseDecryptGameMode<EndlessGameMode<Identity>>();
-});
+// app.UseWhen(ctx=>ctx.Request.Path.StartsWithSegments("/EndlessIdentityMode"),app=>
+// {
+//     app.UseDecryptGameMode<EndlessGameMode<Identity>>();
+// });
 
-app.UseWhen(ctx=>ctx.Request.Path.StartsWithSegments("/DailyIdentityMode"),app=>
-{
-    app.UseDecryptGameMode<DailyGameMode<Identity>>();
-});
+// app.UseWhen(ctx=>ctx.Request.Path.StartsWithSegments("/DailyIdentityMode"),app=>
+// {
+//     app.UseDecryptGameMode<DailyGameMode<Identity>>();
+// });
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=DailyIdentityMode}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}");
 
 
 app.Run();

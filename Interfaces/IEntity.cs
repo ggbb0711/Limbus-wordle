@@ -4,7 +4,6 @@ namespace Limbus_wordle.Interfaces
     {
         string Name { get; }
         string Icon { get; }
-        string SplashArt { get; }
         
     }
 }

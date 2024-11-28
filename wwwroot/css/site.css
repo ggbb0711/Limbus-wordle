@@ -120,6 +120,9 @@ header{
   flex: 1;
   padding: 8px;
   scale: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .game-container::-webkit-scrollbar {

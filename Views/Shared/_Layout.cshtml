@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Limbus wordle</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link  rel="stylesheet" href="~/css/autocomplete.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Limbus_wordle.styles.css" asp-append-version="true" />
     <link rel="icon" href="Content/Images/Limbus_icon.png">
 </head>
@@ -19,13 +18,13 @@
   gtag('config', 'G-0S7J13KG1P');
 </script>
 <body>
-    <header>
+    @* <header>
         <nav class="header">
             <a class="header-btn" asp-area="" asp-controller="DailyIdentityMode" asp-action="Index">Daily</a>
             <a class="header-btn" asp-area="" asp-controller="EndlessIdentityMode" asp-action="Index">Endless</a>
             <a class="header-btn support-btn" href="https://ko-fi.com/johnlimbusidmaker" target="_blank"><img class="support-icon" src="/Content/Images/kofi_s_logo_nolabel.png"/><span>Support me</span></a>
         </nav>
-    </header>
+    </header> *@
     <div class="main-container">
         <main role="main" class="pb-3">
             @RenderBody()
