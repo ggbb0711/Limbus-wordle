@@ -1,9 +1,6 @@
 using System.IO.Abstractions;
 using dotenv.net;
 using Limbus_wordle.BackgroundTask;
-using Limbus_wordle.Middleware;
-using Limbus_wordle.Models;
-using Limbus_wordle.Services;
 using Limbus_wordle.util.WebScrapper;
 using Microsoft.Extensions.FileProviders;
 
@@ -18,6 +15,15 @@ builder.Services.AddHostedService<BackgroundScrapeData>();
 builder.Services.AddHostedService<BackgroundResetDailyIdentityMode>(); 
 builder.Services.AddTransient<IFileSystem,FileSystem>();
 builder.Services.AddDataProtection();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowOrigin",
+                      policy  =>
+                      {
+                          policy.WithOrigins(Environment.GetEnvironmentVariable("FRONTEND_URL"));
+                      });
+});
 
 var app = builder.Build();
 
@@ -41,6 +47,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors("AllowOrigin");
 
 app.UseAuthorization();
 

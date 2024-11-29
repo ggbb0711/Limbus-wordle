@@ -23,18 +23,17 @@ namespace Limbus_wordle.Services
             try
             {
                 string dailyIdentityFile = await fileSystem.File.ReadAllTextAsync(dailyIdentityFilePath);
+                DailyIdentityFile  deserializeDailyIdentities;
 
-                if(dailyIdentityFile=="") dailyIdentityFile = "{}";
-                var deserializeDailyIdentities = JsonSerializer.Deserialize<DailyIdentityFile>(dailyIdentityFile)
-                    ??new DailyIdentityFile()
+                if(dailyIdentityFile=="") deserializeDailyIdentities = new DailyIdentityFile()
                     {
-                        TodayID = new Guid().ToString(),
+                        TodayID = Guid.NewGuid().ToString(),
                         TodayIdentity = await RandomIdentity.Get(),
                         YesterdayIdentity = await RandomIdentity.Get(),
                     };
+                else deserializeDailyIdentities = JsonSerializer.Deserialize<DailyIdentityFile>(dailyIdentityFile);
 
-
-                Console.WriteLine(deserializeDailyIdentities);
+                Console.WriteLine("Daily: "+JsonSerializer.Serialize(deserializeDailyIdentities));
                 await File.WriteAllTextAsync(Path.Combine(rootLink,Environment.GetEnvironmentVariable("DailyIdentityJSONFile")),JsonSerializer.Serialize(deserializeDailyIdentities));
                 _dailyIdentityFile = deserializeDailyIdentities;
             }

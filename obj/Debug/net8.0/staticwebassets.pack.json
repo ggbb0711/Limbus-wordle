@@ -5,10 +5,6 @@
       "PackagePath": "staticwebassets\\Limbus-wordle.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\wwwroot\\css\\autocomplete.css",
-      "PackagePath": "staticwebassets\\css\\autocomplete.css"
-    },
-    {
       "Id": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

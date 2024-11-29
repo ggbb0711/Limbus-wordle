@@ -12,11 +12,11 @@ public class APIController(IDataProtectionProvider dataProtectorProvider):Contro
 
     public async Task<IActionResult> TodayIdentity(){
 
-        return Ok(_dataProtector.Protect(JsonSerializer.Serialize(DailyIdentityGameModeService.GetDailyIdentityFile())));
+        return Ok(DailyIdentityGameModeService.GetDailyIdentityFile());
     }
 
     public async Task<IActionResult> Random(){
-        return Ok(_dataProtector.Protect(JsonSerializer.Serialize(RandomIdentity.Get())));
+        return Ok(RandomIdentity.Get());
     }
 
     public async Task<IActionResult> All(){

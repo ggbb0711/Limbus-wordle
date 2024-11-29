@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fZMpGrKoOLRXL2vJBBlkfe3MJs1i/7RkYYlKrWo7v+U=",
+  "Hash": "KwGd7urMwumjaDnlsGb/fBVKfmly3XNE1j31ZzJosLU=",
   "Source": "Limbus-wordle",
   "BasePath": "_content/Limbus-wordle",
   "Mode": "Default",
@@ -53,25 +53,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Limbus-wordle.bundle.scp.css"
-    },
-    {
-      "Identity": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\wwwroot\\css\\autocomplete.css",
-      "SourceId": "Limbus-wordle",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\wwwroot\\",
-      "BasePath": "_content/Limbus-wordle",
-      "RelativePath": "css/autocomplete.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\autocomplete.css"
     },
     {
       "Identity": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\wwwroot\\css\\site.css",
