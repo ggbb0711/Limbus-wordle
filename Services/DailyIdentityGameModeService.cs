@@ -31,7 +31,12 @@ namespace Limbus_wordle.Services
                         TodayIdentity = await RandomIdentity.Get(),
                         YesterdayIdentity = await RandomIdentity.Get(),
                     };
-                else deserializeDailyIdentities = JsonSerializer.Deserialize<DailyIdentityFile>(dailyIdentityFile);
+                else{
+                    deserializeDailyIdentities = JsonSerializer.Deserialize<DailyIdentityFile>(dailyIdentityFile);
+                    deserializeDailyIdentities.TodayID = Guid.NewGuid().ToString();
+                    deserializeDailyIdentities.YesterdayIdentity = deserializeDailyIdentities.TodayIdentity;
+                    deserializeDailyIdentities.TodayIdentity = await RandomIdentity.Get();
+                } 
 
                 Console.WriteLine("Daily: "+JsonSerializer.Serialize(deserializeDailyIdentities));
                 await File.WriteAllTextAsync(Path.Combine(rootLink,Environment.GetEnvironmentVariable("DailyIdentityJSONFile")),JsonSerializer.Serialize(deserializeDailyIdentities));
