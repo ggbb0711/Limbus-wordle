@@ -9,43 +9,43 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Limbus_wordle
 build_property.RootNamespace = Limbus_wordle
-build_property.ProjectDir = C:\Users\NGHIA\Project\Limbus wordle\Limbus-wordle\
+build_property.ProjectDir = c:\Users\NGHIA\Project\Limbus wordle\Limbus-wordle\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\NGHIA\Project\Limbus wordle\Limbus-wordle
+build_property.MSBuildProjectDirectory = c:\Users\NGHIA\Project\Limbus wordle\Limbus-wordle
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/DailyIdentityMode/Index.cshtml]
+[c:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/DailyIdentityMode/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFpbHlJZGVudGl0eU1vZGVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/EndlessIdentityMode/Index.cshtml]
+[c:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/EndlessIdentityMode/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW5kbGVzc0lkZW50aXR5TW9kZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/Home/Index.cshtml]
+[c:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/Shared/Error.cshtml]
+[c:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/Shared/_ValidationScriptsPartial.cshtml]
+[c:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/_ViewImports.cshtml]
+[c:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/_ViewStart.cshtml]
+[c:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/Shared/_Layout.cshtml]
+[c:/Users/NGHIA/Project/Limbus wordle/Limbus-wordle/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-a0pz6ayte7

@@ -13,3 +13,5 @@ services:
       - DailyIdentityJSONFile=${DailyIdentityJSONFile}
       - IdentityImgFilePath=${IdentityImgFilePath}
       - CookiePass=${CookiePass}
+      - CLOUDINARY_URL=${CLOUDINARY_URL}
+      - FRONTEND_URL=${FRONTEND_URL}
