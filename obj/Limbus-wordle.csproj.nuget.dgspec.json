@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\NGHIA\\Project\\Limbus wordle\\limbus-wordle\\Limbus-wordle.csproj": {}
+    "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\Limbus-wordle.csproj": {}
   },
   "projects": {
-    "C:\\Users\\NGHIA\\Project\\Limbus wordle\\limbus-wordle\\Limbus-wordle.csproj": {
+    "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\Limbus-wordle.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\limbus-wordle\\Limbus-wordle.csproj",
+        "projectUniqueName": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\Limbus-wordle.csproj",
         "projectName": "Limbus-wordle",
-        "projectPath": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\limbus-wordle\\Limbus-wordle.csproj",
+        "projectPath": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\Limbus-wordle.csproj",
         "packagesPath": "C:\\Users\\NGHIA\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\limbus-wordle\\obj\\",
+        "outputPath": "C:\\Users\\NGHIA\\Project\\Limbus wordle\\Limbus-wordle\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\NGHIA\\AppData\\Roaming\\NuGet\\NuGet.Config",

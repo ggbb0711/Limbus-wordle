@@ -21,6 +21,7 @@
 
 a{
   color: white;
+  cursor: pointer;
 }
 
 a:hover{
@@ -123,6 +124,7 @@ header{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .game-container::-webkit-scrollbar {
